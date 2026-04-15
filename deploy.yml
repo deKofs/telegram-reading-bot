@@ -1,0 +1,22 @@
+name: Deploy Telegram Bot
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 204.168.135.252
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /opt/telegram-bot
+            git pull origin main
+            npm install --production
+            pm2 restart telegram-bot || pm2 start bot.js --name telegram-bot
+            pm2 save

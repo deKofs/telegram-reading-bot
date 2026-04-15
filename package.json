@@ -1,0 +1,14 @@
+{
+  "name": "telegram-reading-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot that saves links, WhatsApp messages and images to Notion",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0",
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}
