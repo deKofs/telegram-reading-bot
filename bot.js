@@ -90,9 +90,10 @@ async function handleMessage(msg) {
       content.push({ type: "text", text: msg.text || "" });
     }
 
-    const response = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
+    const response = await client.beta.messages.create({
+      betas: ["mcp-client-2025-04-04"],
+      model: "claude-sonnet-4-6",
+      max_tokens: 4096,
       system: SYSTEM_PROMPT,
       messages: [{ role: "user", content }],
       mcp_servers: [
@@ -100,6 +101,7 @@ async function handleMessage(msg) {
           type: "url",
           url: "https://mcp.notion.com/mcp",
           name: "notion-mcp",
+          authorization_token: process.env.NOTION_API_TOKEN,
         },
       ],
     });
